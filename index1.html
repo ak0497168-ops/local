@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Simulation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 300px;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .progress-bar {
+      width: 100%;
+      background: #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .progress {
+      height: 20px;
+      width: 0%;
+      background: linear-gradient(90deg, #4caf50, #81c784);
+      transition: width 0.3s;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      background: #4caf50;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Download Simulation</h2>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+    <h4 class="percentage">0%</h4>
+    <button id="downloadBtn">Start Download</button>
+  </div>
+
+  <script>
+    const btn = document.getElementById("downloadBtn");
+    const progress = document.getElementById("progress");
+    let percet=document.querySelector(".percentage")
+
+    btn.addEventListener("click", () => {
+      btn.disabled = true;
+      let width = 0;
+      const interval = setInterval(() => {
+        if (width >= 100) {
+          clearInterval(interval);
+          btn.innerText = "Download Complete";
+        } else {
+          width++;
+          percet.textContent=`${width}%`;
+          progress.style.width = width + "%";
+        }
+      }, 50); // speed of download simulation
+    });
+  </script>
+</body>
+</html>
